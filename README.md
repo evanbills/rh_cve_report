@@ -25,6 +25,7 @@ Version 0.1.1 - February 19, 2015
 Version 0.1.2 - February 23, 2015
 - Converted script to use Python's Beautiful Soup and requests 
 - If you are missing either of those modules, install with:
+
 		'pip install requests'
 				or
 		'pip install bs4'  #for Beautiful Soup

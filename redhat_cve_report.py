@@ -1,13 +1,30 @@
 #!/usr/bin/env python
+
+# Author: Evan Bills
+# Description: This utility makes calls to the Red Hat CVE database to retrieve the CVE details.
+# Usage: This script takes a list of CVEs as input and produces a report containing details, statements, and links to any related errata.
+#        The input file should be plain text with one CVE per line. e.g.:
+#
+#        CVE-2015-0409
+#        CVE-2015-0411
+#        CVE-2015-0432
+#        ...
+#
+# Syntax: redhat_cve_report.py <CVE_List>
+
+
+# Required modules. 
+# If python complains about these, install with 'pip install requests'  or 'pip install bs4'
 import requests
 import bs4
 import csv
+import sys
 
 
 CVEURLBase = "https://access.redhat.com/security/cve/"
+filename = sys.argv[-1]
 
-
-with open('CVE_List.txt', 'rb') as f:
+with open(filename, 'rb') as f:
 	reader = csv.reader(f)
 	CVEList = list(reader)
 	for row in CVEList:
