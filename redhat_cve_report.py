@@ -36,7 +36,10 @@ with open(filename, 'rb') as f:
 		DatePublicStr = soup.select('div.cve td') [1].get_text()
 		DetailsUGH = soup.select('div.cve blockquote') [0].get_text()
 		DetailsStr = DetailsUGH.strip()
-		StatementStr = soup.select('div.cve p') [3].get_text()
+		if soup.find_all('h2',text='Statement'):
+			StatementStr = soup.find(text="Statement").findNext('p').contents[0]
+		else:
+			StatementStr = 'N/A'
 		print "---------------------------------------------------------------------------------------------------"
 		print "Pulling details for " + CVENum
 		print "CVE URL: " + CVEURLBase + "/" + CVENum
