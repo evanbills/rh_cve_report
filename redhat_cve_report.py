@@ -37,24 +37,27 @@ with open(filename, 'rb') as f:
 		DetailsUGH = soup.select('div.cve blockquote') [0].get_text()
 		DetailsStr = DetailsUGH.strip()
 		if soup.find_all('h2',text='Statement'):
-			StatementStr = soup.find(text="Statement").findNext('p').contents[0]
+			StatementStr = soup.find(text="Statement").findNext('p').get_text()
 		else:
 			StatementStr = 'N/A'
-		print "---------------------------------------------------------------------------------------------------"
 		print "Pulling details for " + CVENum
-		print "CVE URL: " + CVEURLBase + "/" + CVENum
+		print "CVE URL: " + CVEURLBase + CVENum
 		print "Impact: " + ImpactStr
 		print "Public: " + DatePublicStr
 		print "Statement: " + StatementStr
 		print "Details: " + DetailsStr
 		print "Errata List: "
 
-		for tr in soup('table')[2].find_all('tr')[1:]:
-			col = tr.findAll('td')
-			platform = col[0].string
-			for links in tr.find_all('a'):
-				errata = links['href']
-			releasedate = col[2].string
-			record = (platform,errata,releasedate)
-			print " | ".join(record)
+		if soup('table')[2].find_all('tr')[1:]:
+			for tr in soup('table')[2].find_all('tr')[1:]:
+				col = tr.findAll('td')
+				platform = col[0].string
+				for links in tr.find_all('a'):
+					errata = links['href']
+				releasedate = col[2].string
+				record = (platform,errata,releasedate)
+				print " | ".join(record)
+		else:
+			print "N/A"
+		print "---------------------------------------------------------------------------------------------------"
 			
