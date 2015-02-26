@@ -52,7 +52,9 @@ with open(filename, 'rb') as f:
 		for tr in soup('table')[2].find_all('tr')[1:]:
 			col = tr.findAll('td')
 			platform = col[0].string
-			errata = col[1].string
+			for links in tr.find_all('a'):
+				errata = links['href']
 			releasedate = col[2].string
 			record = (platform,errata,releasedate)
 			print " | ".join(record)
+			
