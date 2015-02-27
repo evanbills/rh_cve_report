@@ -1,6 +1,7 @@
 Red Hat CVE Report Generator (python version)
 
 Original Author: Brandon Williams, updated by Evan Bills to use Python
+
 Description: This utility makes calls to the Red Hat CVE database to retrieve the CVE details.
 
 Usage: This script takes a list of CVEs as input and produces a report containing details, statements, and links to any related errata.The input file should be plain text with one CVE per line. e.g.:
